@@ -4,12 +4,13 @@
 import schedule
 import telepot
 import time
+import credentials
 from arbitrage import catch
 from telepot.loop import MessageLoop
 
 
-TOKEN = 'blablablabla'
-my_id = 1234
+TOKEN = credentials.db_token
+my_id = credentials.db_id
 
 def search():
     odds=catch()

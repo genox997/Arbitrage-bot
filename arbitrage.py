@@ -14,15 +14,15 @@ class odd():
 class under_over_object():
     pass
 
-
-options = webdriver.ChromeOptions()
-options.add_argument("headless")
-
-driver = webdriver.Chrome('./chromedriver',options=options)
-driver.set_window_position(0, 0)
-driver.set_window_size(1500, 1080)
-
-odds_opportunities = []
+def init(): 
+    options = webdriver.ChromeOptions()
+    options.add_argument("headless")
+    global driver
+    driver = webdriver.Chrome('chromedriver',options=options)
+    driver.set_window_position(0, 0)
+    driver.set_window_size(1500, 1080)
+    global odds_opportunities
+    odds_opportunities = []
 
 
 def sanitize_list(mylist):
@@ -36,8 +36,7 @@ def sanitize_list(mylist):
 
 def tennis():
     driver.get('https://www.oddschecker.com/it/tennis/partite-del-giorno')
-    list = driver.find_element_by_xpath('//*[@id="body"]/div[2]/div[2]/div/div/div/div[2]/div/div')
-    #list = driver.find_element_by_xpath('//*[@id="body"]/div[2]/div[2]/div/div/div/div[2]/div/div/div[1]/ul')
+    list = driver.find_element_by_xpath('//*[@id="body"]/div[2]/div[2]/div/div/div/div[3]/div/div[1]/div/div/div/div/div[2]/div/div')
     for row in list.find_elements_by_class_name('_3f0k2k'):
         try:
             match= None
@@ -176,6 +175,7 @@ def baseball():
             odds_opportunities.append(match)
 
 def catch():
+    init()
     tennis()
     football()
     basket()
